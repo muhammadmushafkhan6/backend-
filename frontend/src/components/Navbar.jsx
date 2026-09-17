@@ -381,41 +381,33 @@ export default function Navbar({
             <Search size={18} />
           </button>
 
-          {/* Account / Admin Portal Access */}
-          <button
-            onClick={onOpenAdmin}
-            aria-label="Account Access"
-            title={isAdminLoggedIn ? "Admin Dashboard (Logged In)" : "Maison Account"}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: isAdminLoggedIn ? '#ffffff' : '#cccccc',
-              cursor: 'pointer',
-              padding: 4,
-              display: 'flex',
-              alignItems: 'center',
-              position: 'relative',
-              transition: 'color 0.2s',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = isAdminLoggedIn ? '#ffffff' : '#cccccc')}
-          >
-            <User size={18} />
-            {isAdminLoggedIn && (
-              <span
-                style={{
-                  position: 'absolute',
-                  top: 2,
-                  right: 2,
-                  width: 7,
-                  height: 7,
-                  borderRadius: '50%',
-                  backgroundColor: '#4ade80',
-                  boxShadow: '0 0 6px #4ade80',
-                }}
-              />
-            )}
-          </button>
+          {/* Admin Portal Access (Only visible to logged-in Admin) */}
+          {isAdminLoggedIn && (
+            <button
+              onClick={onOpenAdmin}
+              aria-label="Admin Dashboard"
+              title="Admin Dashboard (Logged In)"
+              style={{
+                background: 'rgba(255, 255, 255, 0.08)',
+                border: '1px solid rgba(74, 222, 128, 0.4)',
+                borderRadius: 9999,
+                color: '#ffffff',
+                cursor: 'pointer',
+                padding: '4px 10px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+                fontSize: '0.68rem',
+                fontFamily: 'var(--font-ui)',
+                fontWeight: 700,
+                letterSpacing: '0.08em',
+                transition: 'all 0.2s',
+              }}
+            >
+              <ShieldCheck size={13} color="#4ade80" />
+              <span>ADMIN</span>
+            </button>
+          )}
 
           {/* Shopping Bag / Cart */}
           <button

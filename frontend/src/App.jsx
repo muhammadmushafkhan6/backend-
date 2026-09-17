@@ -170,13 +170,7 @@ function MainStoreApp() {
           }}
           onBackToStore={() => {
             setCurrentView('store');
-            if (window.location.hash === '#admin') {
-              try {
-                history.pushState('', document.title, window.location.pathname + window.location.search);
-              } catch (_) {
-                window.location.hash = '';
-              }
-            }
+            window.history.pushState('', document.title, '/');
           }}
         />
       );
@@ -187,13 +181,7 @@ function MainStoreApp() {
       <AdminDashboard
         onSwitchToStore={() => {
           setCurrentView('store');
-          if (window.location.hash === '#admin') {
-            try {
-              history.pushState('', document.title, window.location.pathname + window.location.search);
-            } catch (_) {
-              window.location.hash = '';
-            }
-          }
+          window.history.pushState('', document.title, '/');
         }}
       />
     );
