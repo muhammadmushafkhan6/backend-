@@ -2,8 +2,17 @@
   publish = "dist"
   command = "npm run build"
 
-[build.environment]
-  VITE_API_URL = "http://51.24.95.130"
+[[redirects]]
+  from = "/api/*"
+  to = "http://51.24.95.130/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/uploads/*"
+  to = "http://51.24.95.130/uploads/:splat"
+  status = 200
+  force = true
 
 [[redirects]]
   from = "/*"

@@ -1,10 +1,9 @@
-// In development: uses localhost:5000
-// In production (Netlify): uses VITE_API_URL env variable set in Netlify dashboard
+// In development: uses localhost:5000 or Vite proxy
+// In production (Netlify): uses relative /api proxied securely to AWS EC2
+const isProduction = import.meta.env.PROD;
 const API_BASE = import.meta.env.VITE_API_URL
-  ? `${import.meta.env.VITE_API_URL}/api`
-  : window.location.port === '5000'
-  ? '/api'
-  : 'http://localhost:5000/api';
+  ? `${import.meta.env.VITE_API_URL}/api`.replace('//api', '/api')
+  : (isProduction || window.location.port === '5000' ? '/api' : 'http://localhost:5000/api');
 
 
 async function fetchAPI(endpoint, options = {}) {
@@ -155,7 +154,7 @@ export const api = {
         if (data && data.url) {
           const backendBase = import.meta.env.VITE_API_URL
             ? import.meta.env.VITE_API_URL
-            : (window.location.port === '5000' ? '' : 'http://localhost:5000');
+            : (isProduction || window.location.port === '5000' ? '' : 'http://localhost:5000');
           return { success: true, url: `${backendBase}${data.url}` };
         }
       }
