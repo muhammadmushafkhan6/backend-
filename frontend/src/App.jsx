@@ -71,11 +71,12 @@ function MainStoreApp() {
   // URL Routing (/admin, #admin, ?admin=true) & Global Hotkey (Ctrl+Shift+A)
   useEffect(() => {
     const checkAdminRoute = () => {
+      const isSubdomainAdmin = window.location.hostname.startsWith('admin.') || window.location.hostname.startsWith('admin-');
       const isHashAdmin = window.location.hash === '#admin';
       const isPathAdmin = window.location.pathname === '/admin' || window.location.pathname.startsWith('/admin/');
       const isQueryAdmin = new URLSearchParams(window.location.search).get('admin') === 'true';
 
-      if (isHashAdmin || isPathAdmin || isQueryAdmin) {
+      if (isSubdomainAdmin || isHashAdmin || isPathAdmin || isQueryAdmin) {
         setCurrentView('admin');
       }
     };
