@@ -1,0 +1,15 @@
+{
+  "name": "singhar-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Singhar Luxury Fine Jewellery E-Commerce Store & Admin Suite",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "node --watch backend/server.js",
+    "start": "npm --prefix frontend run dev",
+    "start:backend": "node backend/server.js",
+    "build": "npm --prefix frontend run build",
+    "build:frontend": "npm --prefix frontend run build"
+  }
+}

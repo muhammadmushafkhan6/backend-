@@ -1,0 +1,94 @@
+{
+  "products": [
+    {
+      "id": 1788293997942,
+      "name": "Bulbul",
+      "code": "2200$",
+      "category": "earrings",
+      "categoryLabel": "Earrings",
+      "price": 2200,
+      "originalPrice": 2500,
+      "rating": 5,
+      "reviewsCount": 0,
+      "image": "http://localhost:5000/uploads/img_1788295776293_g20m3f.jfif",
+      "hoverImage": "http://localhost:5000/uploads/img_1788295776293_g20m3f.jfif",
+      "badge": "✦ HEIRLOOM",
+      "tab": "new-arrivals",
+      "description": "Elegant Bulbul jewellery piece, designed with a graceful and delicate look to complement both traditional and festive outfits.",
+      "sizes": [
+        "Standard 14-inch Choker",
+        "Adjustable 16-inch"
+      ],
+      "colors": [
+        "Rose Gold"
+      ],
+      "images": [
+        "http://localhost:5000/uploads/img_1788295776293_g20m3f.jfif"
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD-9201",
+      "customerName": "Princess Sara Al-Maktoum",
+      "customerEmail": "sara.couture@example.com",
+      "customerPhone": "+971 50 1234567",
+      "date": "2026-08-30",
+      "total": 870,
+      "status": "Processing",
+      "items": [
+        {
+          "id": 1,
+          "name": "Sabrina Emerald Choker",
+          "price": 380,
+          "quantity": 1,
+          "selectedSize": "Standard 14-inch Choker",
+          "image": "/assets/jewel_emerald_necklace.jpg"
+        },
+        {
+          "id": 3,
+          "name": "Naomi Royale Polki Ensemble",
+          "price": 490,
+          "quantity": 1,
+          "selectedSize": "Bridal Grandeur",
+          "image": "/assets/jewel_polki_necklace.jpg"
+        }
+      ],
+      "address": "Villa 22, Emirates Hills, Dubai"
+    }
+  ],
+  "inquiries": [
+    {
+      "id": "INQ-301",
+      "name": "Zoya Qureshi",
+      "email": "zoya.q@example.com",
+      "inquiryType": "Bridal Bespoke Trousseau",
+      "message": "I would like to commission a customized 22k Polki diamond necklace set with Zambian emerald drops for my December wedding.",
+      "date": "2026-08-31 15:40",
+      "status": "Unread"
+    }
+  ],
+  "settings": {
+    "hero": {
+      "announcement": "✦ MAISON SINGHAR ✦ COMPLIMENTARY WORLDWIDE INSURED TRANSIT & HERITAGE PACKAGING",
+      "giantWordLeft": "pure",
+      "giantWordRight": "allure",
+      "tagline": "Each Singhar jewel is a timeless testament to royal heritage craftsmanship and exquisite gemmology.",
+      "ctaText": "Discover Jewels",
+      "heroBagImage": "/assets/jewel_emerald_necklace.jpg",
+      "chromeBlobImage": "/assets/jewel_diamond_ring.jpg"
+    },
+    "about": {
+      "title": "Maison Singhar",
+      "subtitle": "Savoir-Faire & Heritage",
+      "paragraphs": [
+        "Singhar represents the pinnacle of vintage luxury jewellery, where centuries-old goldsmithing traditions meet rare, hand-selected gemstones.",
+        "Each creation is meticulously cast in solid 18k and 22k gold, adorned with ethically sourced diamonds, unheated sapphires, and natural pearls. Designed to be cherished as heirloom treasures across generations."
+      ],
+      "buttonText": "Explore The Atelier",
+      "mannequinImage": "/assets/jewel_polki_necklace.jpg",
+      "chromeBlobImage": "/assets/jewel_diamond_ring.jpg",
+      "pinkBagAccent": "/assets/jewel_sapphire_jhumkas.jpg"
+    }
+  }
+}
