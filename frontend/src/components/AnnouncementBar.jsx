@@ -103,7 +103,7 @@ export default function AnnouncementBar() {
             fontWeight: 800,
           }}
         >
-          {MESSAGES[index]}
+          {messages[index]}
         </span>
       </div>
 
