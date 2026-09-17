@@ -153,7 +153,9 @@ export const api = {
       if (res.ok) {
         const data = await res.json();
         if (data && data.url) {
-          const backendBase = window.location.port === '5000' ? '' : 'http://localhost:5000';
+          const backendBase = import.meta.env.VITE_API_URL
+            ? import.meta.env.VITE_API_URL
+            : (window.location.port === '5000' ? '' : 'http://localhost:5000');
           return { success: true, url: `${backendBase}${data.url}` };
         }
       }
