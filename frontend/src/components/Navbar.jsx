@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, ShoppingBag, Menu, X, ChevronDown, User, ShieldCheck } from 'lucide-react';
+import { Search, ShoppingBag, Menu, X, ChevronDown } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 
 export default function Navbar({
@@ -10,9 +10,8 @@ export default function Navbar({
   onOpenCart,
   cartCount,
   onOpenContact,
-  onOpenAdmin,
 }) {
-  const { currency, setCurrency, CURRENCY_RATES, isAdminLoggedIn } = useStore();
+  const { currency, setCurrency, CURRENCY_RATES } = useStore();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isShopDropdownOpen, setIsShopDropdownOpen] = useState(false);
@@ -381,33 +380,7 @@ export default function Navbar({
             <Search size={18} />
           </button>
 
-          {/* Admin Portal Access (Only visible to logged-in Admin) */}
-          {isAdminLoggedIn && (
-            <button
-              onClick={onOpenAdmin}
-              aria-label="Admin Dashboard"
-              title="Admin Dashboard (Logged In)"
-              style={{
-                background: 'rgba(255, 255, 255, 0.08)',
-                border: '1px solid rgba(74, 222, 128, 0.4)',
-                borderRadius: 9999,
-                color: '#ffffff',
-                cursor: 'pointer',
-                padding: '4px 10px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6,
-                fontSize: '0.68rem',
-                fontFamily: 'var(--font-ui)',
-                fontWeight: 700,
-                letterSpacing: '0.08em',
-                transition: 'all 0.2s',
-              }}
-            >
-              <ShieldCheck size={13} color="#4ade80" />
-              <span>ADMIN</span>
-            </button>
-          )}
+          {/* Admin Portal: Access via /admin URL only - no visible button */}
 
           {/* Shopping Bag / Cart */}
           <button
@@ -539,34 +512,7 @@ export default function Navbar({
                 >
                   About Atelier
                 </button>
-                {isAdminLoggedIn && (
-                  <button
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      onOpenAdmin();
-                    }}
-                    style={{
-                      background: '#1a1a1a',
-                      border: '1px solid #333333',
-                      borderRadius: 8,
-                      textAlign: 'left',
-                      padding: '10px 14px',
-                      color: '#ffffff',
-                      fontFamily: 'var(--font-brand)',
-                      fontSize: '0.85rem',
-                      fontWeight: 700,
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 8,
-                      marginTop: 8,
-                    }}
-                  >
-                    <ShieldCheck size={16} color="#4ade80" /> Admin Dashboard
-                  </button>
-                )}
+
               </div>
             </div>
           </motion.div>
