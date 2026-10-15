@@ -103,7 +103,7 @@ app.get('/api/health', (_req, res) => {
   res.json({
     status: 'ok',
     service: 'Singhar Luxury Store API (PostgreSQL)',
-    database: 'singhardb',
+    database: process.env.PGDATABASE || 'singhar',
     timestamp: new Date().toISOString(),
   });
 });
@@ -501,7 +501,7 @@ async function startServer() {
     await initDB();
     app.listen(PORT, () => {
       console.log(`✦ Singhar Luxury Store API is running on http://localhost:${PORT}`);
-      console.log(`✦ PostgreSQL Connected: singhardb`);
+      console.log(`✦ PostgreSQL Connected: ${process.env.PGDATABASE || 'singhar'}`);
       console.log(`✦ Health check: http://localhost:${PORT}/api/health`);
       console.log(`✦ Upload endpoint: http://localhost:${PORT}/api/upload`);
     });

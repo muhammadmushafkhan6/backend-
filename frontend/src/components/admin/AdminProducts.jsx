@@ -498,6 +498,45 @@ export default function AdminProducts({ onQuickPreview }) {
                   />
                 </div>
 
+                {/* Category Selector */}
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--dark)', marginBottom: 6 }}>
+                    Category *
+                  </label>
+                  <select
+                    required
+                    value={formData.category}
+                    onChange={(e) => {
+                      const categoryMap = {
+                        necklaces: 'Necklaces',
+                        earrings: 'Earrings',
+                        rings: 'Rings',
+                        bangles: 'Bangles & Cuffs',
+                      };
+                      setFormData({
+                        ...formData,
+                        category: e.target.value,
+                        categoryLabel: categoryMap[e.target.value] || 'Necklaces',
+                      });
+                    }}
+                    style={{
+                      width: '100%',
+                      padding: '11px 14px',
+                      borderRadius: 12,
+                      border: '1px solid var(--border-light)',
+                      fontSize: '0.88rem',
+                      outline: 'none',
+                      background: '#fff',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <option value="necklaces">💎 Royale Necklaces</option>
+                    <option value="earrings">✨ Vintage Earrings</option>
+                    <option value="rings">💍 Artisan Rings</option>
+                    <option value="bangles">🔮 Heritage Bangles</option>
+                  </select>
+                </div>
+
                 {/* Price & Product Color */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
                   <div>

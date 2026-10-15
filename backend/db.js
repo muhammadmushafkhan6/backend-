@@ -28,7 +28,7 @@ export const pool = new Pool({
   password: process.env.PGPASSWORD || 'BSSE2280127',
   host: process.env.PGHOST || 'localhost',
   port: parseInt(process.env.PGPORT || '5432', 10),
-  database: process.env.PGDATABASE || 'singhardb',
+  database: process.env.PGDATABASE || 'singhar',
   max: 20,
   idleTimeoutMillis: 30000,
 });
@@ -37,8 +37,40 @@ pool.on('error', (err) => {
   console.error('Unexpected error on idle PostgreSQL client', err);
 });
 
+// ─── Ensure Database Exists ──────────────────────────────────────────────────
+async function ensureDatabaseExists() {
+  const dbName = process.env.PGDATABASE || 'singhar';
+  const adminClient = new pg.Client({
+    user: process.env.PGUSER || 'postgres',
+    password: process.env.PGPASSWORD || 'BSSE2280127',
+    host: process.env.PGHOST || 'localhost',
+    port: parseInt(process.env.PGPORT || '5432', 10),
+    database: 'postgres',
+  });
+
+  try {
+    await adminClient.connect();
+    const checkRes = await adminClient.query(
+      'SELECT 1 FROM pg_database WHERE datname = $1',
+      [dbName]
+    );
+    if (checkRes.rows.length === 0) {
+      console.log(`✦ Database "${dbName}" not found. Creating database...`);
+      await adminClient.query(`CREATE DATABASE "${dbName}"`);
+      console.log(`✦ Database "${dbName}" created successfully!`);
+    }
+  } catch {
+    // Silently continue if postgres maintenance DB is unavailable
+  } finally {
+    try {
+      await adminClient.end();
+    } catch {}
+  }
+}
+
 // ─── Initialize Database & Tables ─────────────────────────────────────────────
 export async function initDB() {
+  await ensureDatabaseExists();
   const client = await pool.connect();
   try {
     // 1. Products Table
@@ -120,7 +152,7 @@ export async function initDB() {
     // Seed default administrator if table is empty
     const { rows: adminRows } = await client.query(`SELECT COUNT(*) FROM admin_users;`);
     if (parseInt(adminRows[0].count, 10) === 0) {
-      console.log('Seeding initial administrator user into PostgreSQL singhardb...');
+      console.log(`Seeding initial administrator user into PostgreSQL ${process.env.PGDATABASE || 'singhar'}...`);
       const { salt, hash } = hashPassword('admin123');
       await client.query(
         `INSERT INTO admin_users (username, email, password_hash, salt, role)
@@ -133,7 +165,7 @@ export async function initDB() {
     // 6. Seed initial products if table is empty
     const { rows: prodRows } = await client.query(`SELECT COUNT(*) FROM products;`);
     if (parseInt(prodRows[0].count, 10) === 0 && INITIAL_DATA.products?.length > 0) {
-      console.log('Seeding initial products into PostgreSQL singhardb...');
+      console.log(`Seeding initial products into PostgreSQL ${process.env.PGDATABASE || 'singhar'}...`);
       for (const p of INITIAL_DATA.products) {
         const images = Array.isArray(p.images) && p.images.length > 0
           ? p.images
@@ -178,7 +210,7 @@ export async function initDB() {
       );
     }
 
-    console.log('✦ PostgreSQL (singhardb) tables checked & ready.');
+    console.log(`✦ PostgreSQL (${process.env.PGDATABASE || 'singhar'}) tables checked & ready.`);
   } catch (err) {
     console.error('Database initialization error:', err);
   } finally {

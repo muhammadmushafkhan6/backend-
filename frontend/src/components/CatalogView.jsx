@@ -26,12 +26,13 @@ export default function CatalogView({
       ? products
       : products.filter((p) => p.category === selectedCat);
 
+  // .slice() to avoid mutating the original array
   if (sortBy === 'price-low') {
-    filtered.sort((a, b) => a.price - b.price);
+    filtered = filtered.slice().sort((a, b) => a.price - b.price);
   } else if (sortBy === 'price-high') {
-    filtered.sort((a, b) => b.price - a.price);
+    filtered = filtered.slice().sort((a, b) => b.price - a.price);
   } else if (sortBy === 'rating') {
-    filtered.sort((a, b) => b.rating - a.rating);
+    filtered = filtered.slice().sort((a, b) => b.rating - a.rating);
   }
 
   return (
